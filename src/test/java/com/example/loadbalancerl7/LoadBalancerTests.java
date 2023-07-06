@@ -5,13 +5,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.MediaType;
 import org.springframework.test.web.reactive.server.WebTestClient;
-
 
 import java.io.IOException;
 
-import static org.springframework.http.MediaType.APPLICATION_JSON;
 
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -20,12 +17,18 @@ class LoadBalancerTests {
     @Autowired
     private WebTestClient webTestClient;
 
-
+    ObjectMapper objectMapper = new ObjectMapper();
     @Test
     void shouldReturnThreeDefaultUsers() throws IOException {
-            this.webTestClient
+        byte[] bytes = this.webTestClient
                 .get()
-                .uri("/get").exchange().expectStatus().is2xxSuccessful();
+                .uri("/get")
+                .exchange()
+                .expectStatus()
+                .is2xxSuccessful()
+                .expectHeader()
+                .contentType("text/plain;charset=UTF-8")
+                .expectBody().returnResult().getRequestBodyContent();
 
 
     }

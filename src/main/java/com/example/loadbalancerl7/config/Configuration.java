@@ -10,12 +10,13 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 import java.time.Duration;
+import java.util.List;
 import java.util.UUID;
 
 @Component
 public class Configuration {
-    @Value("${backend.url}")
-    private String backendUrl;
+    @Value("#{'${backend.url}'.split(',')}")
+    private List<String> backendUrl;
     @Value("${lb.rate.limit.requests}")
     private Integer rateLimiterRequests;
 
@@ -23,13 +24,13 @@ public class Configuration {
     private Integer rateLimitIntervalMillis;
     @Bean
     public WorkerPool getConsistentHashRingPool() {
-        // For this exmaple we are using just one backend, in actual case you would want to use
-        // A set of urls representing your backend, or some kind of service discovery mechaism
+        // For this example we are using just one backend, in actual case you would want to use
+        // A set of urls representing your backend, or some kind of service discovery mechanism
 
         ConsistentHashRingPool pool = new ConsistentHashRingPool(2);
-        for (int i = 0; i < 10; i++) {
+        for (String urls: backendUrl) {
             pool.add(new WebClientWorker(UUID.randomUUID().toString(),
-                    WebClientBuilder.createWebClient(backendUrl),
+                    WebClientBuilder.createWebClient(urls),
                     new SWRateLimiter(rateLimiterRequests,
                             Duration.ofMillis(rateLimitIntervalMillis))));
         }
