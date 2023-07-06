@@ -1,8 +1,7 @@
 package com.example.loadbalancerl7;
 
-import com.example.loadbalancerl7.entity.SlidingWindowRateLimiter;
+import com.example.loadbalancerl7.entity.SWRateLimiter;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.Duration;
 import java.util.Random;
@@ -11,7 +10,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicLong;
 
 
-class LoadBalancerL7ApplicationTests {
+class RateLimiterTests {
 
     ExecutorService executorService = Executors.newFixedThreadPool(10);
     AtomicLong patomicLong = new AtomicLong();
@@ -20,7 +19,7 @@ class LoadBalancerL7ApplicationTests {
     @Test
     void contextLoads() throws InterruptedException {
         long start = System.currentTimeMillis();
-        SlidingWindowRateLimiter slidingWindowRateLimiter = new SlidingWindowRateLimiter(2, Duration.ofMillis(1000));
+        SWRateLimiter slidingWindowRateLimiter = new SWRateLimiter(2, Duration.ofMillis(1000));
         while (true) {
             Thread.sleep(random.nextInt(80)+100);
             executorService.submit(()->{

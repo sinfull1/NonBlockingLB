@@ -6,29 +6,31 @@ import reactor.core.publisher.Mono;
 
 public class WebClientWorker implements Worker {
 
-    @Override
-    public String getId() {
-        return id;
-    }
 
-    private String id;
-    WebClient webClient;
+    final String id;
+    final WebClient webClient;
 
-    public WebClientWorker() {
-    }
+    final SWRateLimiter swRateLimiter;
 
-    public WebClientWorker(String id, WebClient webClient) {
+    public WebClientWorker(String id, WebClient webClient, SWRateLimiter swRateLimiter) {
         this.id = id;
         this.webClient = webClient;
+        this.swRateLimiter = swRateLimiter;
     }
 
 
     @Override
     public Mono<String> doWork(Work work) throws InterruptedException {
-        Thread.sleep(1000);
+        // swRateLimiter.isAllowed()
         return webClient.get()
                 .uri(work.uri)
                 .retrieve()
                 .bodyToMono(String.class);
     }
+
+    @Override
+    public String getId() {
+        return id;
+    }
+
 }

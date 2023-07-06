@@ -2,7 +2,6 @@ package com.example.loadbalancerl7.utils;
 
 import com.example.loadbalancerl7.entity.Worker;
 import com.example.loadbalancerl7.entity.WorkerPool;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.concurrent.atomic.AtomicLong;
@@ -10,10 +9,14 @@ import java.util.concurrent.atomic.AtomicLong;
 @Component
 public class LoadBalancingStrategy {
 
-    @Autowired
-    WorkerPool workerPool;
+
+    final WorkerPool workerPool;
 
     AtomicLong atomicLong = new AtomicLong();
+
+    public LoadBalancingStrategy(WorkerPool workerPool) {
+        this.workerPool = workerPool;
+    }
 
     public Worker getRoundRobin() {
         atomicLong.addAndGet(1);

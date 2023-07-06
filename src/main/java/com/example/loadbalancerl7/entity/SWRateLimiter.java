@@ -3,16 +3,15 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.Queue;
 import java.util.concurrent.*;
-import java.util.concurrent.atomic.AtomicLong;
 
-public class SlidingWindowRateLimiter {
+public class SWRateLimiter {
     private int limit;
     private Duration interval;
     private Queue<Instant> requestQueue;
     private ScheduledExecutorService executorService;
     private ScheduledFuture<?> refillTask;
 
-    public SlidingWindowRateLimiter(int limit, Duration interval) {
+    public SWRateLimiter(int limit, Duration interval) {
         this.limit = limit;
         this.interval = interval;
         this.requestQueue = new LinkedBlockingQueue<>(limit);
