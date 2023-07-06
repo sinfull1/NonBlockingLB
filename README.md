@@ -1,3 +1,6 @@
 # NonBlockingLB
 
-Exmaple of LoadABalancer based on Consistent Hashing (supports virtual node for replication) using spring framework
+Exmaple of Load Balancer 
+    Consistent Hashing
+    Replcation Support
+    Virtual Nodes
