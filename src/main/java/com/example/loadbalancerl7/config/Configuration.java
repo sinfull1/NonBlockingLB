@@ -3,7 +3,7 @@ package com.example.loadbalancerl7.config;
 
 import com.example.loadbalancerl7.entity.SWRateLimiter;
 import com.example.loadbalancerl7.entity.WebClientWorker;
-import com.example.loadbalancerl7.entity.WorkerPool;
+import com.example.loadbalancerl7.interfaces.WorkerPool;
 import com.example.loadbalancerl7.entity.ConsistentHashRingPool;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;

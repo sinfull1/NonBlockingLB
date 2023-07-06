@@ -1,4 +1,4 @@
-package com.example.loadbalancerl7.entity;
+package com.example.loadbalancerl7.interfaces;
 
 
 public interface WorkerPool {

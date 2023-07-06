@@ -1,5 +1,6 @@
 package com.example.loadbalancerl7.entity;
 
+import com.example.loadbalancerl7.interfaces.Worker;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 

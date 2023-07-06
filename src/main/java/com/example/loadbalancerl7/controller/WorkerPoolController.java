@@ -4,7 +4,7 @@ package com.example.loadbalancerl7.controller;
 import com.example.loadbalancerl7.config.WebClientBuilder;
 import com.example.loadbalancerl7.entity.SWRateLimiter;
 import com.example.loadbalancerl7.entity.WebClientWorker;
-import com.example.loadbalancerl7.entity.WorkerPool;
+import com.example.loadbalancerl7.interfaces.WorkerPool;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;

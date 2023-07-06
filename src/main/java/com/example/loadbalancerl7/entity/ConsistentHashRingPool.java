@@ -1,7 +1,7 @@
 package com.example.loadbalancerl7.entity;
 
-import com.example.loadbalancerl7.entity.Worker;
-import com.example.loadbalancerl7.entity.WorkerPool;
+import com.example.loadbalancerl7.interfaces.Worker;
+import com.example.loadbalancerl7.interfaces.WorkerPool;
 
 import java.util.HashMap;
 import java.util.Map;

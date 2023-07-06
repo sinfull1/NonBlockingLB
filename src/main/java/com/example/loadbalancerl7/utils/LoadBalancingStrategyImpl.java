@@ -1,10 +1,9 @@
 package com.example.loadbalancerl7.utils;
 
-import com.example.loadbalancerl7.entity.Worker;
-import com.example.loadbalancerl7.entity.WorkerPool;
+import com.example.loadbalancerl7.interfaces.LoadBalancingStrategy;
+import com.example.loadbalancerl7.interfaces.Worker;
+import com.example.loadbalancerl7.interfaces.WorkerPool;
 import org.springframework.stereotype.Component;
-
-import java.util.concurrent.atomic.AtomicLong;
 
 @Component
 public class LoadBalancingStrategyImpl implements LoadBalancingStrategy {

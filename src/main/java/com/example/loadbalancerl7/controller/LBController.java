@@ -1,8 +1,8 @@
 package com.example.loadbalancerl7.controller;
 
 import com.example.loadbalancerl7.entity.Work;
-import com.example.loadbalancerl7.entity.Worker;
-import com.example.loadbalancerl7.utils.LoadBalancingStrategy;
+import com.example.loadbalancerl7.interfaces.Worker;
+import com.example.loadbalancerl7.interfaces.LoadBalancingStrategy;
 import com.example.loadbalancerl7.utils.LoadBalancingStrategyImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -31,7 +31,7 @@ public class LBController {
     @GetMapping("/get")
     public Mono<String> queryRoundRobin() throws InterruptedException {
         String user = users.get(random.nextInt(users.size()));
-        Worker worker = loadBalancingStrategy.getWorker(user);
+        Worker<Mono<String>> worker = loadBalancingStrategy.getWorker(user);
         Work work = new Work();
         work.setUri("/get");
         log.info("Processing for User:" + user + " one worker id " + worker.getId());
