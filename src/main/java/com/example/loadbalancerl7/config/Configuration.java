@@ -23,6 +23,9 @@ public class Configuration {
     private Integer rateLimitIntervalMillis;
     @Bean
     public WorkerPool getConsistentHashRingPool() {
+        // For this exmaple we are using just one backend, in actual case you would want to use
+        // A set of urls representing your backend, or some kind of service discovery mechaism
+
         ConsistentHashRingPool pool = new ConsistentHashRingPool(2);
         for (int i = 0; i < 10; i++) {
             pool.add(new WebClientWorker(UUID.randomUUID().toString(),
